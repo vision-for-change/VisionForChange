@@ -96,6 +96,26 @@ Three placeholders are deliberate and need real values:
 Also add `apps/web/public/og.png` (1200x630) for social previews, and the app
 icon and splash assets referenced in `apps/mobile/app.json`.
 
+## Fonts
+
+Fraunces and DM Sans are vendored as woff2 in `apps/web/app/fonts` and loaded
+with `next/font/local`.
+
+Do not switch these back to `next/font/google`. That variant downloads the
+font files from `fonts.gstatic.com` **during the build**, so any build machine
+that cannot reach Google Fonts fails the whole deploy. Vendoring them makes
+builds deterministic and offline-capable, and the fonts are still self-hosted
+at runtime either way.
+
+Both are variable fonts, so one file per style covers the full weight range.
+Only the `latin` subset is included, which covers English plus the typographic
+punctuation used in the copy. Add other subsets if the copy ever needs them.
+Both are licensed under the OFL; the licences sit beside the font files.
+
+The mobile app loads the same families through `@expo-google-fonts`, which
+ships the font binaries inside the package, so it has no build-time network
+dependency either.
+
 ## Icons
 
 `apps/web/app/favicon.ico`, `icon.png`, and `apple-icon.png` are generated from

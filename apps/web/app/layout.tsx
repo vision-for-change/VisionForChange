@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { DM_Sans, Fraunces } from 'next/font/google';
+import localFont from 'next/font/local';
 import { cssVariables, site } from '@vfc/shared';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
@@ -7,19 +7,28 @@ import { JsonLd } from '@/components/JsonLd';
 import { BASE_URL, organizationJsonLd } from '@/components/seo';
 import './globals.css';
 
-const fraunces = Fraunces({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  style: ['normal', 'italic'],
+/*
+  The fonts are vendored into ./fonts rather than pulled from Google at
+  build time. `next/font/google` fetches over the network during the
+  build, which fails whenever the build machine cannot reach
+  fonts.gstatic.com. These are variable fonts, so one file per style
+  covers the whole weight range.
+*/
+const fraunces = localFont({
+  src: [
+    { path: './fonts/Fraunces-Variable.woff2', weight: '100 900', style: 'normal' },
+    { path: './fonts/Fraunces-Italic-Variable.woff2', weight: '100 900', style: 'italic' },
+  ],
   variable: '--font-fraunces',
   display: 'swap',
+  fallback: ['Georgia', 'serif'],
 });
 
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
+const dmSans = localFont({
+  src: [{ path: './fonts/DMSans-Variable.woff2', weight: '100 1000', style: 'normal' }],
   variable: '--font-dm-sans',
   display: 'swap',
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 export const metadata: Metadata = {
