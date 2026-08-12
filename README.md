@@ -38,11 +38,15 @@ Runs at `http://localhost:3000`. Production build:
 npm run build
 ```
 
-Set the canonical origin before deploying, otherwise canonical URLs, the
-sitemap, and Open Graph tags all point at the default in `packages/shared/src/content.ts`:
+The canonical origin is `https://visionforchange.xyz`, set in
+`packages/shared/src/content.ts`. Canonical URLs, the sitemap, `robots.txt`,
+and Open Graph tags all derive from it.
+
+Preview and staging deployments should override it so they never emit
+canonical tags pointing at production:
 
 ```bash
-NEXT_PUBLIC_SITE_URL=https://your-domain.org
+NEXT_PUBLIC_SITE_URL=https://staging.visionforchange.xyz
 ```
 
 ## Mobile

@@ -13,7 +13,7 @@ export const site = {
   description:
     'Vision for Change is a youth-led eye-care initiative working to make essential eye care more accessible to people facing financial barriers.',
   shortDescription: 'Making eye care more accessible.',
-  url: 'https://visionforchange.org',
+  url: 'https://visionforchange.xyz',
   email: 'visionforchange18@gmail.com',
   phone: '+1 613 282 8851',
   phoneHref: '+16132828851',
