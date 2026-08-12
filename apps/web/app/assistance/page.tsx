@@ -1,0 +1,95 @@
+import type { Metadata } from 'next';
+import { assistance, assistanceFaq, assistanceSteps, mailto } from '@vfc/shared';
+import { JsonLd } from '@/components/JsonLd';
+import { Reveal } from '@/components/Reveal';
+import { ActionLink, Eyebrow, Notice, PageHead, SplitHeading } from '@/components/ui';
+import { breadcrumbJsonLd, faqJsonLd, pageMetadata } from '@/components/seo';
+
+export const metadata: Metadata = pageMetadata({
+  title: 'Get Eye-Care Assistance',
+  description:
+    'If cost is preventing you from accessing eye care, Vision for Change may be able to connect you with available resources and participating providers. Free to request.',
+  path: '/assistance',
+});
+
+export default function AssistancePage() {
+  return (
+    <>
+      <JsonLd data={faqJsonLd(assistanceFaq)} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: 'Home', path: '/' },
+          { name: 'Get Eye-Care Assistance', path: '/assistance' },
+        ])}
+      />
+      <PageHead
+        eyebrow={assistance.eyebrow}
+        top={assistance.titleTop}
+        accent={assistance.titleAccent}
+        body={assistance.body}
+        aside={assistance.aside}
+      />
+
+      <div className="sec">
+        <div className="wrap">
+          <Reveal className="head center">
+            <Eyebrow index="01" center>
+              How it works
+            </Eyebrow>
+            <SplitHeading top="Three steps," accent="no cost to you." />
+          </Reveal>
+
+          <ol className="steps">
+            {assistanceSteps.map((step, i) => (
+              <Reveal as="li" className="step" key={step.title}>
+                <span className="step-num" aria-hidden="true">
+                  {i + 1}
+                </span>
+                <div>
+                  <h3 className="h-sm">{step.title}</h3>
+                  <p>{step.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </ol>
+
+          <Reveal>
+            <div className="btns center" style={{ marginTop: 44 }}>
+              <ActionLink href={mailto('Eye-Care Assistance Request')} label={assistance.cta} />
+            </div>
+          </Reveal>
+
+          <Reveal>
+            <div style={{ maxWidth: 660, margin: '32px auto 0' }}>
+              <Notice icon="info">
+                We&apos;re an early-stage initiative still building our provider network, so we
+                can&apos;t guarantee an outcome for every request.{' '}
+                <strong>We&apos;ll do our best to connect you with available assistance.</strong>
+              </Notice>
+            </div>
+          </Reveal>
+        </div>
+      </div>
+
+      <div className="sec tone">
+        <div className="wrap wrap-narrow">
+          <Reveal className="head center">
+            <Eyebrow index="02" center>
+              Common questions
+            </Eyebrow>
+            <SplitHeading top="Before you" accent="reach out" />
+          </Reveal>
+
+          <div className="grid-2">
+            {assistanceFaq.map((item) => (
+              <Reveal className="card" key={item.q}>
+                <h3 className="h-sm">{item.q}</h3>
+                <p>{item.a}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}

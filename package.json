@@ -1,0 +1,21 @@
+{
+  "name": "vision-for-change",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @vfc/web",
+    "build": "npm run build --workspace @vfc/web",
+    "start": "npm run start --workspace @vfc/web",
+    "mobile": "npm run start --workspace @vfc/mobile",
+    "ios": "npm run ios --workspace @vfc/mobile",
+    "android": "npm run android --workspace @vfc/mobile",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
