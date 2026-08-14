@@ -37,21 +37,31 @@ export const metadata: Metadata = {
     default: `${site.name}: ${site.tagline}`,
     template: `%s | ${site.name}`,
   },
-  description: site.description,
+  description: site.metaDescription,
   applicationName: site.name,
   keywords: [
-    'eye care access',
-    'free eye exam help',
-    'affordable glasses',
-    'youth-led nonprofit',
-    'vision health',
-    'optometry partnership',
+    'Vision for Change',
+    'Vision for Change eye care',
+    'Vision for Change Ottawa',
+    'eye care initiative',
+    'eye health awareness',
+    'accessible eye care',
+    'affordable eye care',
+    'eye care support',
+    'eye health education',
+    'optometrist connections',
+    'eye care for underserved communities',
     'Ottawa eye care',
   ],
   authors: [{ name: site.name, url: BASE_URL }],
   creator: site.name,
   publisher: site.name,
-  alternates: { canonical: BASE_URL },
+  /*
+    No `alternates.canonical` here on purpose. A canonical set at the root
+    is inherited by any route that does not set its own, which would point
+    error pages at the home page. Every real route sets one via
+    `pageMetadata()`.
+  */
   robots: {
     index: true,
     follow: true,
@@ -59,6 +69,14 @@ export const metadata: Metadata = {
   },
   category: 'nonprofit',
   formatDetection: { telephone: true, address: false, email: true },
+  /*
+    Search Console's HTML-tag verification. Set the env var to the token
+    value only, not the whole meta tag. Left undefined, no tag is emitted,
+    so the DNS or file verification methods still work instead.
+  */
+  verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+    : undefined,
 };
 
 export const viewport: Viewport = {

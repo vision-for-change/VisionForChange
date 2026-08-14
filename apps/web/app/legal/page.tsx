@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import { legal, site } from '@vfc/shared';
+import { JsonLd } from '@/components/JsonLd';
 import { Reveal } from '@/components/Reveal';
 import { PageHead } from '@/components/ui';
-import { pageMetadata } from '@/components/seo';
+import { breadcrumbJsonLd, pageMetadata } from '@/components/seo';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Legal',
@@ -14,6 +15,12 @@ export const metadata: Metadata = pageMetadata({
 export default function LegalPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: 'Home', path: '/' },
+          { name: 'Legal', path: '/legal' },
+        ])}
+      />
       <PageHead
         eyebrow="Legal"
         top="Privacy, terms and"

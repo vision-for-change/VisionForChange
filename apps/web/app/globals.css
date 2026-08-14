@@ -397,6 +397,60 @@ em.accent { font-style: italic; font-weight: 400; color: var(--teal); }
 }
 .quote p { font-family: var(--font-display); font-size: 20px; font-style: italic; line-height: 1.55; color: var(--ink); margin: 0; }
 
+/* ── What is Vision for Change ── */
+.what-is { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(40px, 6vw, 76px); align-items: start; }
+.what-is-list { margin: 0; padding: 0; list-style: none; }
+.what-is-list li {
+  display: grid; grid-template-columns: 30px 1fr; gap: 16px; align-items: start;
+  padding: 20px 0; border-top: 1px solid var(--line);
+}
+.what-is-list li:last-child { border-bottom: 1px solid var(--line); }
+.what-is-ico {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--teal-wash); color: var(--teal);
+}
+.what-is-list b { display: block; font-size: 15.5px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.what-is-list span span { display: block; font-size: 14.5px; line-height: 1.7; color: var(--muted); }
+
+/* ── Eye care guide ── */
+.guide-toc {
+  padding: 30px 34px; margin-bottom: 12px;
+  background: var(--white); border: 1px solid var(--line); border-radius: var(--r-md);
+}
+.guide-toc > b {
+  display: block; margin-bottom: 16px;
+  font-size: 11.5px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--muted);
+}
+.guide-toc ol { margin: 0; padding: 0; list-style: none; counter-reset: toc; }
+.guide-toc li { counter-increment: toc; }
+.guide-toc li + li { margin-top: 10px; }
+.guide-toc a {
+  display: flex; gap: 12px; align-items: baseline;
+  font-size: 15.5px; line-height: 1.5; color: var(--ink-2); text-decoration: none;
+  transition: color .25s;
+}
+.guide-toc a::before {
+  content: counter(toc, decimal-leading-zero);
+  flex: none; font-size: 11.5px; font-weight: 700; letter-spacing: .8px; color: var(--teal);
+}
+.guide-toc a:hover { color: var(--teal); }
+
+.guide-sec { padding-top: 56px; }
+.guide-sec + .guide-sec { border-top: 1px solid var(--line); }
+/* Offset for the fixed nav so anchor jumps do not land under it. */
+.guide-sec article { scroll-margin-top: 96px; }
+.guide-q { margin: 6px 0 18px; }
+.guide-summary { margin-bottom: 26px; }
+.guide-points { margin: 26px 0 0; padding: 0; list-style: none; }
+.guide-points li {
+  display: grid; grid-template-columns: 22px 1fr; gap: 12px; align-items: start;
+  padding: 11px 0; border-top: 1px solid var(--line);
+  font-size: 15.5px; line-height: 1.65; color: var(--ink-2);
+}
+.guide-points .ico { color: var(--teal); margin-top: 2px; }
+.guide-links { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 26px; }
+
 .timeline { border-left: 1px solid var(--line-2); padding-left: 30px; margin-top: 6px; list-style: none; }
 .tl { position: relative; padding-bottom: 30px; }
 .tl:last-child { padding-bottom: 0; }
@@ -452,7 +506,7 @@ em.accent { font-style: italic; font-weight: 400; color: var(--teal); }
 .footer { background: var(--ink); color: var(--paper); padding: 76px clamp(20px, 5vw, 64px) 34px; }
 .foot-grid {
   max-width: var(--maxw); margin: 0 auto;
-  display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 52px;
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; gap: 44px;
   padding-bottom: 48px; border-bottom: 1px solid rgba(251, 250, 247, .12);
 }
 .foot-brand .brand-name { color: var(--paper); }
@@ -467,7 +521,9 @@ em.accent { font-style: italic; font-weight: 400; color: var(--teal); }
 .foot-col b { display: block; font-size: 11px; font-weight: 700; letter-spacing: 1.7px; text-transform: uppercase; color: var(--teal-lt); margin-bottom: 18px; }
 .foot-col a { display: block; font-size: 14.5px; color: rgba(251, 250, 247, .58); text-decoration: none; padding: 5px 0; transition: color .2s; }
 .foot-col a:hover { color: var(--paper); }
-.foot-bottom { max-width: var(--maxw); margin: 26px auto 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 13px; color: rgba(251, 250, 247, .34); }
+.foot-bottom { max-width: var(--maxw); margin: 26px auto 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px 26px; font-size: 13px; color: rgba(251, 250, 247, .34); }
+.foot-bottom a { color: inherit; text-decoration: none; transition: color .2s; }
+.foot-bottom a:hover { color: rgba(251, 250, 247, .7); }
 
 /* ── Reveal ── */
 .rv { opacity: 0; transform: translateY(18px); transition: opacity .6s cubic-bezier(.4, 0, .2, 1), transform .6s cubic-bezier(.4, 0, .2, 1); }
@@ -486,16 +542,24 @@ em.accent { font-style: italic; font-weight: 400; color: var(--teal); }
 }
 
 /* ── Responsive ── */
-@media (max-width: 1080px) {
+/* Seven nav links need the tighter spacing well before the layout
+   breakpoints below, so this rule gets its own width. */
+@media (max-width: 1320px) {
   .nav-links a { padding: 8px 10px; font-size: 13.5px; }
-  .hero-grid, .app-showcase, .about-grid, .page-head-grid { grid-template-columns: 1fr; gap: 44px; }
+}
+@media (max-width: 1080px) {
+  .hero-grid, .app-showcase, .about-grid, .page-head-grid, .what-is { grid-template-columns: 1fr; gap: 44px; }
   .page-head-grid { align-items: start; }
   .hero-art { order: -1; max-width: 340px; margin: 0 auto; }
-  .foot-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .foot-grid { grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
 }
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
+  /* The primary nav carries seven links. Below this width they no longer
+     fit beside the brand and the CTA, so the drawer takes over. */
   .nav-links, .nav > .nav-cta { display: none; }
   .burger { display: flex; }
+}
+@media (max-width: 900px) {
   .grid-2, .grid-3, .involve-grid { grid-template-columns: 1fr; }
   .pillar { grid-template-columns: 1fr; gap: 18px; padding: 36px 30px; }
   .pillar-index { order: -1; font-size: 38px; }

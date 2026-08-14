@@ -4,18 +4,30 @@ import { Icon } from '@/components/Icon';
 import { JsonLd } from '@/components/JsonLd';
 import { Reveal } from '@/components/Reveal';
 import { ActionLink, PageHead } from '@/components/ui';
-import { breadcrumbJsonLd, pageMetadata } from '@/components/seo';
+import { breadcrumbJsonLd, pageMetadata, webPageJsonLd } from '@/components/seo';
+
+const TITLE = 'Our Work: Vision for Change Updates and Progress';
+const DESCRIPTION =
+  'Progress updates from Vision for Change: community partnerships, the app beta, optometry partners, eye-health workshops, and our first impact report.';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Our Work',
-  description:
-    'Progress updates from Vision for Change: community partnerships, the app beta, optometry partners, workshops, and our first impact report.',
+  absoluteTitle: TITLE,
+  description: DESCRIPTION,
   path: '/updates',
 });
 
 export default function UpdatesPage() {
   return (
     <>
+      <JsonLd
+        data={webPageJsonLd({
+          type: 'CollectionPage',
+          title: TITLE,
+          description: DESCRIPTION,
+          path: '/updates',
+        })}
+      />
       <JsonLd
         data={breadcrumbJsonLd([
           { name: 'Home', path: '/' },

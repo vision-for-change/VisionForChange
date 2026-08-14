@@ -70,12 +70,32 @@ Runs `tsc --noEmit` across all three workspaces.
 
 Handled in the web app:
 
-- Per-page `title`, `description`, and canonical URL via `pageMetadata()` in `apps/web/components/seo.ts`
-- Open Graph and Twitter card tags on every route
-- JSON-LD structured data: `NGO` and `WebSite` sitewide, `FAQPage` on the assistance page, `MobileApplication` on the app page, and `BreadcrumbList` on interior pages
-- `sitemap.xml` and `robots.txt` generated at build (`app/sitemap.ts`, `app/robots.ts`)
+- Per-page `title`, `description`, and canonical URL via `pageMetadata()` in `apps/web/components/seo.ts`. Pass `absoluteTitle` when the title already contains the organization name, so the `%s | Vision for Change` template does not repeat it
+- Open Graph and Twitter card tags on every route, backed by `public/og.png`
+- JSON-LD structured data: `NGO`/`Organization` and `WebSite` sitewide, a typed `WebPage` (or `AboutPage`, `ContactPage`, `CollectionPage`) per route, `FAQPage` on the assistance page and the eye-care guide, `MobileApplication` on the app page, and `BreadcrumbList` on interior pages
+- `sitemap.xml`, `robots.txt`, and `manifest.webmanifest` generated at build (`app/sitemap.ts`, `app/robots.ts`, `app/manifest.ts`)
 - Semantic landmarks, one `h1` per page, a skip link, and `aria-current` on the active nav item
 - Every page is statically rendered, so crawlers receive complete HTML with no client-side fetch
+
+The canonical is deliberately **not** set in the root layout. A root canonical is
+inherited by any route that does not set its own, which would point error pages
+at the home page. Every real route sets one through `pageMetadata()`.
+
+`/eye-care-guide` is the content-SEO surface. Each section is an `h2` phrased as
+a question people actually search, and the `FAQPage` entries reuse the same
+heading and summary strings from `packages/shared/src/content.ts`, so the
+structured data cannot drift from what the page says. Anything added there
+should stay genuinely useful and keep deferring medical specifics to a
+qualified professional.
+
+To verify the site in Google Search Console with the HTML-tag method, set the
+token value only (not the whole meta tag):
+
+```bash
+NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=your-token-here
+```
+
+Left unset, no tag is emitted and the DNS or file methods still work.
 
 Scroll-reveal animations only toggle a CSS class. The content is always in
 the HTML, and the `no-js` class on `<html>` keeps everything visible when
@@ -97,8 +117,12 @@ Three placeholders are deliberate and need real values:
 2. **Team** entries are placeholder roles with `VC` initials. Replace with real names and photos.
 3. **Assistance and partnership CTAs** are `mailto:` links. Swap in a real form URL when one exists.
 
-Also add `apps/web/public/og.png` (1200x630) for social previews, and the app
-icon and splash assets referenced in `apps/mobile/app.json`.
+Also add the app icon and splash assets referenced in `apps/mobile/app.json`.
+
+`apps/web/public/og.png` (1200x630 social preview) and `public/logo.png`
+(512x512, referenced by the `Organization` schema and the web manifest) are
+generated from the brand mark and committed. Regenerate both if the logo or
+tagline changes.
 
 ## Fonts
 

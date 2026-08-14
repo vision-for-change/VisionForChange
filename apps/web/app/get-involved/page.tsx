@@ -4,18 +4,30 @@ import { Icon } from '@/components/Icon';
 import { JsonLd } from '@/components/JsonLd';
 import { Reveal } from '@/components/Reveal';
 import { ArrowLink, Eyebrow, PageHead, SplitHeading } from '@/components/ui';
-import { breadcrumbJsonLd, pageMetadata } from '@/components/seo';
+import { breadcrumbJsonLd, pageMetadata, webPageJsonLd } from '@/components/seo';
+
+const TITLE = 'Get Involved: Partner with Vision for Change';
+const DESCRIPTION =
+  'Partner with Vision for Change as an optometrist, community organization, sponsor, or volunteer, and help widen access to eye care in Ottawa and beyond.';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Get Involved',
-  description:
-    'Partner with Vision for Change as an optometrist, community organization, sponsor, or volunteer, and help widen access to eye care.',
+  absoluteTitle: TITLE,
+  description: DESCRIPTION,
   path: '/get-involved',
 });
 
 export default function GetInvolvedPage() {
   return (
     <>
+      <JsonLd
+        data={webPageJsonLd({
+          type: 'ContactPage',
+          title: TITLE,
+          description: DESCRIPTION,
+          path: '/get-involved',
+        })}
+      />
       <JsonLd
         data={breadcrumbJsonLd([
           { name: 'Home', path: '/' },

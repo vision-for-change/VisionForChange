@@ -4,18 +4,30 @@ import { JsonLd } from '@/components/JsonLd';
 import { Reveal } from '@/components/Reveal';
 import { ActionLink, Eyebrow, PageHead, SplitHeading } from '@/components/ui';
 import { ImpactSection } from '@/components/sections';
-import { breadcrumbJsonLd, pageMetadata } from '@/components/seo';
+import { breadcrumbJsonLd, pageMetadata, webPageJsonLd } from '@/components/seo';
+
+const TITLE = 'About Vision for Change: Our Story and Team';
+const DESCRIPTION =
+  'Vision for Change is a youth-led eye-care initiative founded in 2026 in Ottawa, Ontario, on one idea: eye care should not depend on your ability to pay.';
 
 export const metadata: Metadata = pageMetadata({
   title: 'About Us',
-  description:
-    'Vision for Change is a youth-led initiative founded on one idea: access to quality eye care should not depend solely on financial circumstances.',
+  absoluteTitle: TITLE,
+  description: DESCRIPTION,
   path: '/about',
 });
 
 export default function AboutPage() {
   return (
     <>
+      <JsonLd
+        data={webPageJsonLd({
+          type: 'AboutPage',
+          title: TITLE,
+          description: DESCRIPTION,
+          path: '/about',
+        })}
+      />
       <JsonLd
         data={breadcrumbJsonLd([
           { name: 'Home', path: '/' },

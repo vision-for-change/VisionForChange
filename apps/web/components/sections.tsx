@@ -4,10 +4,51 @@ import {
   pillars,
   problemIntro,
   problems,
+  whatIs,
 } from '@vfc/shared';
 import { Icon } from './Icon';
 import { Reveal } from './Reveal';
 import { ArrowLink, Eyebrow, SplitHeading } from './ui';
+
+/**
+ * States plainly what the organization is, in a heading phrased the way
+ * people ask it. The home page otherwise leads with a tagline, which reads
+ * well but never actually says what Vision for Change does.
+ */
+export function WhatIsSection({ index = '01' }: { index?: string }) {
+  return (
+    <div className="sec">
+      <div className="wrap what-is">
+        <Reveal>
+          <Eyebrow index={index}>{whatIs.eyebrow}</Eyebrow>
+          <h2 className="h-lg">{whatIs.heading}</h2>
+          <p className="lead" style={{ marginTop: 18 }}>
+            {whatIs.body}
+          </p>
+          <div className="btns" style={{ marginTop: 30 }}>
+            <ArrowLink href="/mission" label="Read our mission" />
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <ul className="what-is-list">
+            {whatIs.points.map((point) => (
+              <li key={point.label}>
+                <span className="what-is-ico">
+                  <Icon name="check" size="sm" />
+                </span>
+                <span>
+                  <b>{point.label}</b>
+                  <span>{point.body}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+      </div>
+    </div>
+  );
+}
 
 /** Decorative line drawing used in the home hero. */
 export function HeroArt() {

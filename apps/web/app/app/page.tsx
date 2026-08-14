@@ -4,12 +4,16 @@ import { Icon } from '@/components/Icon';
 import { JsonLd } from '@/components/JsonLd';
 import { Reveal } from '@/components/Reveal';
 import { ActionLink, CtaBand, Eyebrow, Notice, PageHead, SplitHeading } from '@/components/ui';
-import { BASE_URL, breadcrumbJsonLd, pageMetadata } from '@/components/seo';
+import { BASE_URL, breadcrumbJsonLd, pageMetadata, webPageJsonLd } from '@/components/seo';
+
+const TITLE = 'Our App: Screen Habit Tracking and Eye-Care Reminders';
+const DESCRIPTION =
+  'Track your screen habits, get break reminders, learn evidence-based eye care, and find optometrists. The Vision for Change mobile app, free on iOS and Android.';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Our App',
-  description:
-    'Track your screen habits, get break reminders, learn evidence-based eye care, and find optometrists. The Vision for Change mobile app.',
+  absoluteTitle: TITLE,
+  description: DESCRIPTION,
   path: '/app',
 });
 
@@ -22,6 +26,8 @@ const appJsonLd = {
   description: appPage.body,
   url: `${BASE_URL}/app`,
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'CAD' },
+  publisher: { '@id': `${BASE_URL}/#organization` },
+  featureList: appFeatures.map((feature) => `${feature.title}: ${feature.body}`),
 };
 
 /** Static UI mockups. Purely decorative, so they stay out of the a11y tree. */
@@ -127,6 +133,13 @@ function DeviceMockups() {
 export default function AppPage() {
   return (
     <>
+      <JsonLd
+        data={webPageJsonLd({
+          title: TITLE,
+          description: DESCRIPTION,
+          path: '/app',
+        })}
+      />
       <JsonLd data={appJsonLd} />
       <JsonLd
         data={breadcrumbJsonLd([

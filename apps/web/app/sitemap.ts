@@ -4,6 +4,7 @@ import { BASE_URL } from '@/components/seo';
 const ROUTES: { path: string; priority: number; changeFrequency: 'weekly' | 'monthly' }[] = [
   { path: '/', priority: 1, changeFrequency: 'weekly' },
   { path: '/assistance', priority: 0.9, changeFrequency: 'monthly' },
+  { path: '/eye-care-guide', priority: 0.9, changeFrequency: 'monthly' },
   { path: '/app', priority: 0.8, changeFrequency: 'weekly' },
   { path: '/mission', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/get-involved', priority: 0.8, changeFrequency: 'monthly' },

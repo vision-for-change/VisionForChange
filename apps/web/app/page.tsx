@@ -1,18 +1,36 @@
 import type { Metadata } from 'next';
 import { hero, site } from '@vfc/shared';
 import { ActionLink, CtaBand } from '@/components/ui';
-import { HeroArt, ImpactSection, Pillars, ProblemRows } from '@/components/sections';
-import { pageMetadata } from '@/components/seo';
+import {
+  HeroArt,
+  ImpactSection,
+  Pillars,
+  ProblemRows,
+  WhatIsSection,
+} from '@/components/sections';
+import { JsonLd } from '@/components/JsonLd';
+import { pageMetadata, webPageJsonLd } from '@/components/seo';
+
+const TITLE = `${site.name}: Accessible Eye Care Initiative in Ottawa`;
 
 export const metadata: Metadata = pageMetadata({
-  title: `${site.name}: ${site.tagline}`,
-  description: site.description,
+  title: site.name,
+  absoluteTitle: TITLE,
+  description: site.metaDescription,
   path: '/',
 });
 
 export default function HomePage() {
   return (
     <>
+      <JsonLd
+        data={webPageJsonLd({
+          type: 'WebPage',
+          title: TITLE,
+          description: site.definition,
+          path: '/',
+        })}
+      />
       <section className="hero">
         <div className="hero-grid">
           <div>
@@ -36,13 +54,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      <ProblemRows index="01" />
-      <Pillars index="02" />
-      <ImpactSection tone index="03" />
+      <WhatIsSection index="01" />
+      <ProblemRows index="02" />
+      <Pillars index="03" />
+      <ImpactSection tone index="04" />
 
       <CtaBand
         eyebrow="Get Assistance"
-        index="04"
+        index="05"
         top="Need help accessing"
         accent="eye care?"
         body="If cost or another barrier is standing in the way, tell us about your situation and we'll do our best to connect you with available assistance."

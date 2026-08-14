@@ -3,18 +3,29 @@ import { assistance, assistanceFaq, assistanceSteps, mailto } from '@vfc/shared'
 import { JsonLd } from '@/components/JsonLd';
 import { Reveal } from '@/components/Reveal';
 import { ActionLink, Eyebrow, Notice, PageHead, SplitHeading } from '@/components/ui';
-import { breadcrumbJsonLd, faqJsonLd, pageMetadata } from '@/components/seo';
+import { breadcrumbJsonLd, faqJsonLd, pageMetadata, webPageJsonLd } from '@/components/seo';
+
+const TITLE = 'Get Eye-Care Assistance: Free Help Accessing Eye Care';
+const DESCRIPTION =
+  'If cost is preventing you from accessing eye care, Vision for Change can try to connect you with eye care support and optometrists in Ottawa. Free to request.';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Get Eye-Care Assistance',
-  description:
-    'If cost is preventing you from accessing eye care, Vision for Change may be able to connect you with available resources and participating providers. Free to request.',
+  absoluteTitle: TITLE,
+  description: DESCRIPTION,
   path: '/assistance',
 });
 
 export default function AssistancePage() {
   return (
     <>
+      <JsonLd
+        data={webPageJsonLd({
+          title: TITLE,
+          description: DESCRIPTION,
+          path: '/assistance',
+        })}
+      />
       <JsonLd data={faqJsonLd(assistanceFaq)} />
       <JsonLd
         data={breadcrumbJsonLd([
