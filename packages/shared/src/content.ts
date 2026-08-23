@@ -34,6 +34,9 @@ export const site = {
   instagramHandle: '@visionforchange2026',
   sponsorForm:
     'https://docs.google.com/forms/d/e/1FAIpQLSeTK_PN2sIn9YGsXqR97BFPVaWW6oPix-yyXlw8b3ifZ2gABw/viewform',
+  /** Google Form people fill in to request eye-care assistance. */
+  assistanceForm:
+    'https://docs.google.com/forms/d/e/1FAIpQLSd4uaeIt9WIFzL2SKZyuhJzdq_PG5e42f2--eAiK_2qaIR72g/viewform',
   locality: 'Ottawa',
   region: 'ON',
   country: 'CA',

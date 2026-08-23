@@ -59,6 +59,9 @@ export function Footer() {
               {item.label}
             </Link>
           ))}
+          <a href={site.assistanceForm} target="_blank" rel="noopener noreferrer">
+            Assistance Form
+          </a>
         </nav>
 
         <nav className="foot-col" aria-label="Eye care guide">

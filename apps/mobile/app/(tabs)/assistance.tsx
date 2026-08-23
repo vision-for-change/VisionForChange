@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { assistance, assistanceFaq, assistanceSteps, mailto } from '@vfc/shared';
+import { assistance, assistanceFaq, assistanceSteps, mailto, site } from '@vfc/shared';
 import { Body, Button, Card, Eyebrow, Heading, Lead, Notice, Section } from '@/components/ui';
 import { theme } from '@/theme';
 
@@ -43,9 +43,17 @@ export default function AssistanceScreen() {
 
         <Button
           label={assistance.cta}
+          href={site.assistanceForm}
+          icon="arrowUpRight"
+          style={{ marginTop: space.lg }}
+        />
+
+        <Button
+          label="Prefer to email us instead?"
           href={mailto('Eye-Care Assistance Request')}
           icon="mail"
-          style={{ marginTop: space.lg }}
+          variant="outline"
+          style={{ marginTop: space.sm }}
         />
 
         <View style={{ marginTop: space.md }}>

@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import { assistance, assistanceFaq, assistanceSteps, mailto } from '@vfc/shared';
+import { assistance, assistanceFaq, assistanceSteps, mailto, site } from '@vfc/shared';
 import { JsonLd } from '@/components/JsonLd';
 import { Reveal } from '@/components/Reveal';
-import { ActionLink, Eyebrow, Notice, PageHead, SplitHeading } from '@/components/ui';
+import { ActionLink, ArrowLink, Eyebrow, Notice, PageHead, SplitHeading } from '@/components/ui';
 import { breadcrumbJsonLd, faqJsonLd, pageMetadata, webPageJsonLd } from '@/components/seo';
 
 const TITLE = 'Get Eye-Care Assistance: Free Help Accessing Eye Care';
@@ -66,8 +66,13 @@ export default function AssistancePage() {
 
           <Reveal>
             <div className="btns center" style={{ marginTop: 44 }}>
-              <ActionLink href={mailto('Eye-Care Assistance Request')} label={assistance.cta} />
+              <ActionLink href={site.assistanceForm} label={assistance.cta} external />
             </div>
+            <p className="center" style={{ marginTop: 18 }}>
+              {/* The form is the way in, but nobody should be stuck if they
+                  can't use it, so the email route stays one click away. */}
+              <ArrowLink href={mailto('Eye-Care Assistance Request')} label="Prefer to email us instead?" />
+            </p>
           </Reveal>
 
           <Reveal>
