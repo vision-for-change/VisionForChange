@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { mailto, site } from '@vfc/shared';
+import { site } from '@vfc/shared';
 import { Brand } from './ui';
 import { Icon } from './Icon';
 
@@ -22,6 +22,13 @@ const GUIDE = [
   { href: '/eye-care-guide#why-regular-eye-care-matters', label: 'Why eye exams matter' },
   { href: '/eye-care-guide#screen-time-and-eyes', label: 'Screen time and your eyes' },
   { href: '/eye-care-guide#connect-with-an-optometrist', label: 'Finding an optometrist' },
+];
+
+const PARTNER = [
+  { href: site.optometryForm, label: 'Optometrists' },
+  { href: site.communityForm, label: 'Organizations' },
+  { href: site.sponsorForm, label: 'Sponsors' },
+  { href: site.volunteerForm, label: 'Volunteers' },
 ];
 
 const LEGAL = [
@@ -75,12 +82,11 @@ export function Footer() {
 
         <nav className="foot-col" aria-label="For partners">
           <b>For Partners</b>
-          <a href={mailto('Optometry Partnership')}>Optometrists</a>
-          <a href={mailto('Community Partnership')}>Organizations</a>
-          <a href={site.sponsorForm} target="_blank" rel="noopener noreferrer">
-            Sponsors
-          </a>
-          <a href={mailto('Volunteering')}>Volunteers</a>
+          {PARTNER.map((item) => (
+            <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer">
+              {item.label}
+            </a>
+          ))}
         </nav>
 
         <nav className="foot-col" aria-label="Legal">

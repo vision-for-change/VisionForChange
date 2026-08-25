@@ -32,11 +32,21 @@ export const site = {
   phoneHref: '+16132828851',
   instagram: 'https://www.instagram.com/visionforchange2026/',
   instagramHandle: '@visionforchange2026',
-  sponsorForm:
-    'https://docs.google.com/forms/d/e/1FAIpQLSeTK_PN2sIn9YGsXqR97BFPVaWW6oPix-yyXlw8b3ifZ2gABw/viewform',
-  /** Google Form people fill in to request eye-care assistance. */
+  /**
+   * Intake forms. Every way in — asking for help, offering it, or funding it —
+   * runs through a Google Form so nothing depends on someone having a mail
+   * client set up, and so requests land somewhere we can actually track them.
+   */
   assistanceForm:
     'https://docs.google.com/forms/d/e/1FAIpQLSd4uaeIt9WIFzL2SKZyuhJzdq_PG5e42f2--eAiK_2qaIR72g/viewform',
+  optometryForm:
+    'https://docs.google.com/forms/d/e/1FAIpQLSdHI4K0kHjJnIMZcpeiqr_drFDT13DLnKlLnbORDf6mgumR6g/viewform',
+  communityForm:
+    'https://docs.google.com/forms/d/e/1FAIpQLSfUtj1Sqqcoc94GUodsI0Pqw88FyKQQT16YR9EvCab9tjME3A/viewform',
+  sponsorForm:
+    'https://docs.google.com/forms/d/e/1FAIpQLSd3UkUMzSeeynkh_X287ZiwOhKN5Yonezt7XXf5biGQgfBSqw/viewform',
+  volunteerForm:
+    'https://docs.google.com/forms/d/e/1FAIpQLSfcVoTsRDDMvq4Id7LYL0uPlIZp3wqys9Qh_JltCCNVF8410w/viewform',
   locality: 'Ottawa',
   region: 'ON',
   country: 'CA',
@@ -458,14 +468,16 @@ export const involveOptions: Involve[] = [
     title: 'Optometrists',
     body: 'Interested in helping make eye care more accessible? Partner with us to offer reduced-cost or sponsored services to people we connect you with.',
     linkLabel: 'Become an Optometry Partner',
-    href: mailto('Optometry Partnership'),
+    href: site.optometryForm,
+    external: true,
   },
   {
     icon: 'building',
     title: 'Organizations',
     body: "Are you a school, nonprofit, community organization, or youth organization interested in working with us? Let's find a way to reach the people you serve.",
     linkLabel: 'Become a Community Partner',
-    href: mailto('Community Partnership'),
+    href: site.communityForm,
+    external: true,
   },
   {
     icon: 'heart',
@@ -480,7 +492,8 @@ export const involveOptions: Involve[] = [
     title: 'Volunteers',
     body: 'Help us educate, build, organize, and grow our initiative. We need people for outreach, design, development, research, and community events.',
     linkLabel: 'Volunteer',
-    href: mailto('Volunteering'),
+    href: site.volunteerForm,
+    external: true,
   },
 ];
 
@@ -528,25 +541,24 @@ export const roadmap = [
   },
 ] as const;
 
-/** Placeholder team. Replace with real names, roles, and photos. */
 export const team = [
   {
-    initials: 'VC',
-    name: 'Founder',
-    role: 'Direction and Partnerships',
-    body: "Leads the initiative's strategy and builds relationships with optometrists and community organizations.",
+    initials: 'NC',
+    name: 'Nimansh Chauhan',
+    role: 'Founder and Co-President',
+    body: "Started Vision for Change and leads its direction, building the partnerships that turn an assistance request into actual care.",
   },
   {
-    initials: 'VC',
-    name: 'App Lead',
-    role: 'Product and Development',
-    body: 'Designs and builds the Vision for Change mobile app and its screen-habit tools.',
+    initials: 'BT',
+    name: 'Bryan Tang',
+    role: 'Outreach Lead and Co-President',
+    body: 'Leads outreach and community work, connecting us with the schools, organizations, and people we exist to serve.',
   },
   {
-    initials: 'VC',
-    name: 'Outreach Lead',
-    role: 'Education and Community',
-    body: 'Runs our social media, educational content, and community workshops.',
+    initials: 'D',
+    name: 'Delisha',
+    role: 'Marketing Lead and Co-President',
+    body: 'Leads marketing and communications, running our social media and the educational content that reaches people before a problem sets in.',
   },
   {
     initials: 'VC',

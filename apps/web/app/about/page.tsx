@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { about, roadmap, team } from '@vfc/shared';
 import { JsonLd } from '@/components/JsonLd';
 import { Reveal } from '@/components/Reveal';
@@ -42,6 +43,23 @@ export default function AboutPage() {
         aside={about.aside}
       />
 
+      <div className="sec" style={{ paddingBottom: 0 }}>
+        <div className="wrap">
+          <Reveal>
+            <figure className="wordmark">
+              <Image
+                src="/wordmark.png"
+                alt="Vision for Change"
+                width={1280}
+                height={321}
+                sizes="(max-width: 700px) 88vw, 560px"
+                priority
+              />
+            </figure>
+          </Reveal>
+        </div>
+      </div>
+
       <div className="sec">
         <div className="wrap about-grid">
           <Reveal>
@@ -80,7 +98,7 @@ export default function AboutPage() {
             <Eyebrow index="03">Our team</Eyebrow>
             <SplitHeading top="The people" accent="behind it" />
             <p className="lead">
-              A small, youth-led team spread across outreach, development, and partnerships.
+              A small, youth-led team spread across outreach, marketing, and partnerships.
             </p>
           </Reveal>
 

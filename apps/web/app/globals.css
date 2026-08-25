@@ -472,6 +472,16 @@ em.accent { font-style: italic; font-weight: 400; color: var(--teal); }
 .member span { display: block; margin-top: 4px; font-size: 11.5px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--teal); }
 .member p { margin-top: 14px; font-size: 14px; line-height: 1.65; color: var(--muted); }
 
+/* ── About: wordmark plate ── */
+/* The logo is a wide lockup, so it gets its own band rather than being
+   squeezed into a column. Capped in px so it never outgrows its plate. */
+.wordmark {
+  margin: 0; padding: clamp(30px, 5vw, 52px) clamp(24px, 5vw, 60px);
+  background: var(--white); border: 1px solid var(--line); border-radius: var(--r-lg);
+  display: flex; align-items: center; justify-content: center;
+}
+.wordmark img { width: 100%; max-width: 560px; height: auto; }
+
 /* ── Updates ── */
 .updates { border-top: 1px solid var(--line); list-style: none; }
 .update { display: grid; grid-template-columns: 52px 1fr 140px; gap: 26px; align-items: start; padding: 32px 8px; border-bottom: 1px solid var(--line); transition: background .3s; }
