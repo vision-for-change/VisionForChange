@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { nav, primaryCta } from '@vfc/shared';
-import { Brand } from './ui';
+import { BrandLogo } from './ui';
 import { Icon } from './Icon';
 
 export function Nav() {
@@ -37,7 +37,7 @@ export function Nav() {
   return (
     <>
       <nav className={stuck ? 'nav stuck' : 'nav'} aria-label="Primary">
-        <Brand />
+        <BrandLogo />
 
         <ul className="nav-links">
           {nav.map((item) => (

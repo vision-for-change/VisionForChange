@@ -49,10 +49,10 @@ export default function AboutPage() {
           <Reveal>
             <figure className="wordmark">
               <Image
-                src="/wordmark.png"
+                src="/vision-for-change-wordmark.png"
                 alt="Vision for Change logo"
-                width={1280}
-                height={321}
+                width={1265}
+                height={189}
                 sizes="(max-width: 700px) 88vw, 560px"
                 priority
               />

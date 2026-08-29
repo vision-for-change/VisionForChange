@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { Icon } from './Icon';
@@ -19,6 +20,21 @@ export function BrandMark({ inverse = false }: { inverse?: boolean }) {
       <circle cx="20" cy="20" r="4.3" fill="#0E6E62" />
       <circle cx="20" cy="20" r="1.7" fill={pupil} />
     </svg>
+  );
+}
+
+/**
+ * The full wordmark, used in the nav. `Brand` below stays for the footer:
+ * this artwork is black and teal, so it would disappear on the dark plate.
+ *
+ * The alt text carries the organization name, since the words here are
+ * pixels rather than markup.
+ */
+export function BrandLogo() {
+  return (
+    <Link href="/" className="brand-logo" aria-label="Vision for Change, home">
+      <Image src="/vision-for-change-wordmark.png" alt="Vision for Change" width={1265} height={189} priority />
+    </Link>
   );
 }
 
