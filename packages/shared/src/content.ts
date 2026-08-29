@@ -26,7 +26,13 @@ export const site = {
    */
   metaDescription:
     'Vision for Change is a youth-led eye-care initiative in Ottawa, Ontario, making eye care more accessible through prevention, referrals, and free education.',
-  url: 'https://visionforchange.xyz',
+  /*
+    The canonical host. The apex domain 308-redirects to www, so this must
+    carry the www prefix: every canonical, Open Graph URL, sitemap entry,
+    and schema @id is built from it, and pointing them at a URL that
+    redirects splits the signals Google uses to pick a canonical.
+  */
+  url: 'https://www.visionforchange.xyz',
   email: 'visionforchange18@gmail.com',
   phone: '+1 613 282 8851',
   phoneHref: '+16132828851',

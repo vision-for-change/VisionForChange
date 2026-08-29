@@ -13,6 +13,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: `${site.name}: ${site.tagline}`,
     short_name: site.name,
     description: site.definition,
+    id: '/',
     start_url: '/',
     scope: '/',
     display: 'standalone',

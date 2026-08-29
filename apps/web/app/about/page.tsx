@@ -27,6 +27,7 @@ export default function AboutPage() {
           title: TITLE,
           description: DESCRIPTION,
           path: '/about',
+          mainEntityIsOrganization: true,
         })}
       />
       <JsonLd
@@ -49,7 +50,7 @@ export default function AboutPage() {
             <figure className="wordmark">
               <Image
                 src="/wordmark.png"
-                alt="Vision for Change"
+                alt="Vision for Change logo"
                 width={1280}
                 height={321}
                 sizes="(max-width: 700px) 88vw, 560px"
@@ -104,7 +105,13 @@ export default function AboutPage() {
 
           <div className="team">
             {team.map((member) => (
-              <Reveal className="member" key={member.name}>
+              <Reveal
+                className="member"
+                key={member.name}
+                // Matches the Person @id emitted in the organization schema,
+                // so each fragment resolves to the card it describes.
+                id={member.name.toLowerCase().replace(/\s+/g, '-')}
+              >
                 <span className="member-avatar" aria-hidden="true">
                   {member.initials}
                 </span>

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { site } from '@vfc/shared';
+import { site, team } from '@vfc/shared';
 
 export const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? site.url;
 
@@ -58,6 +58,22 @@ export function pageMetadata({
  * which is what lets the two be treated as one organization.
  */
 export function organizationJsonLd() {
+  const personRefs = team
+    // "Volunteers" is a collective placeholder rather than a named person.
+    .filter((member) => member.name !== 'Volunteers')
+    .map((member) => ({
+      isFounder: member.role.toLowerCase().includes('founder'),
+      node: {
+        '@type': 'Person',
+        '@id': `${BASE_URL}/about#${member.name.toLowerCase().replace(/\s+/g, '-')}`,
+        name: member.name,
+        jobTitle: member.role,
+        description: member.body,
+        affiliation: { '@id': `${BASE_URL}/#organization` },
+        url: `${BASE_URL}/about`,
+      },
+    }));
+
   const organization = {
     '@type': ['NGO', 'Organization'],
     '@id': `${BASE_URL}/#organization`,
@@ -88,6 +104,13 @@ export function organizationJsonLd() {
     // registration type, and this is a volunteer initiative rather than a
     // registered charity. Claiming one would be a false signal.
     sameAs: [site.instagram],
+    /*
+      Named people tie the organization to real humans, which is one of the
+      signals that separates a genuine entity from a parked domain. The
+      "Volunteers" card is a group, not a person, so it is filtered out.
+    */
+    founder: personRefs.filter((person) => person.isFounder).map((person) => person.node),
+    member: personRefs.map((person) => person.node),
     address: {
       '@type': 'PostalAddress',
       addressLocality: site.locality,
@@ -158,11 +181,15 @@ export function webPageJsonLd({
   title,
   description,
   path,
+  mainEntityIsOrganization = false,
 }: {
   type?: 'WebPage' | 'AboutPage' | 'ContactPage' | 'CollectionPage' | 'FAQPage';
   title: string;
   description: string;
   path: string;
+  /** Set on the page that is *about* the organization, so it reads as the
+   *  authoritative description of the entity rather than another mention. */
+  mainEntityIsOrganization?: boolean;
 }) {
   const url = path === '/' ? BASE_URL : `${BASE_URL}${path}`;
   return {
@@ -174,6 +201,9 @@ export function webPageJsonLd({
     description,
     isPartOf: { '@id': `${BASE_URL}/#website` },
     about: { '@id': `${BASE_URL}/#organization` },
+    ...(mainEntityIsOrganization
+      ? { mainEntity: { '@id': `${BASE_URL}/#organization` } }
+      : {}),
     publisher: { '@id': `${BASE_URL}/#organization` },
     inLanguage: 'en-CA',
   };

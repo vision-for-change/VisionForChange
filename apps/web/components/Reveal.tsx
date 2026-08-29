@@ -17,10 +17,13 @@ export function Reveal({
   children,
   as: Tag = 'div',
   className,
+  id,
 }: {
   children: ReactNode;
   as?: 'div' | 'section' | 'li';
   className?: string;
+  /** Anchor target, so schema @ids and deep links can point at the block. */
+  id?: string;
 }) {
   const ref = useRef<HTMLElement | null>(null);
 
@@ -58,7 +61,7 @@ export function Reveal({
 
   const cls = className ? `rv ${className}` : 'rv';
   return (
-    <Tag ref={ref as never} className={cls}>
+    <Tag ref={ref as never} className={cls} id={id}>
       {children}
     </Tag>
   );

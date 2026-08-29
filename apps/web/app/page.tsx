@@ -38,7 +38,14 @@ export default function HomePage() {
               <b>{hero.badge}</b>
               <span>{hero.badgeNote}</span>
             </p>
+            {/*
+              The visible h1 is the tagline, which carries no brand name. The
+              organization name leads the heading for screen readers and
+              crawlers so the site's most important heading names the entity
+              the domain belongs to, without altering the hero's design.
+            */}
             <h1 className="h-xl">
+              <span className="visually-hidden">{site.name}: </span>
               {hero.titleTop}
               <br />
               <em className="accent">{hero.titleAccent}</em>

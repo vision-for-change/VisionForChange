@@ -3,7 +3,7 @@ import { legal, site } from '@vfc/shared';
 import { JsonLd } from '@/components/JsonLd';
 import { Reveal } from '@/components/Reveal';
 import { PageHead } from '@/components/ui';
-import { breadcrumbJsonLd, pageMetadata } from '@/components/seo';
+import { breadcrumbJsonLd, pageMetadata, webPageJsonLd } from '@/components/seo';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Legal',
@@ -15,6 +15,14 @@ export const metadata: Metadata = pageMetadata({
 export default function LegalPage() {
   return (
     <>
+      <JsonLd
+        data={webPageJsonLd({
+          title: 'Legal: Privacy, Terms, and Accessibility',
+          description:
+            'Privacy, terms, and accessibility for Vision for Change, in plain language.',
+          path: '/legal',
+        })}
+      />
       <JsonLd
         data={breadcrumbJsonLd([
           { name: 'Home', path: '/' },
